@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UFtpLibray.Activities", "..\UiPath.Activities\UFtpLibray.Activities.csproj", "{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UFtpLibray.Activities.Design", "..\UiPath.Activities.Design\UFtpLibray.Activities.Design.csproj", "{138BA1AC-82C4-465B-9F58-E01414B3F3D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138BA1AC-82C4-465B-9F58-E01414B3F3D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138BA1AC-82C4-465B-9F58-E01414B3F3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138BA1AC-82C4-465B-9F58-E01414B3F3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138BA1AC-82C4-465B-9F58-E01414B3F3D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

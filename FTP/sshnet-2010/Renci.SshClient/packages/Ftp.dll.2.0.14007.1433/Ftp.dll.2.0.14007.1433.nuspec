@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Ftp.dll</id>
+    <version>2.0.14007.1433</version>
+    <title>Ftp.dll - .NET FTP/FTPS component (FTP, FTPS)</title>
+    <authors>Limilabs</authors>
+    <owners>Limilabs</owners>
+    <licenseUrl>http://www.limilabs.com/static/ftp/license.txt</licenseUrl>
+    <projectUrl>http://www.limilabs.com/ftp</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Ftp.dll is a .NET FTP component and FTPS component. It allows you to transfer files from and to your application using FTP and FTPS (also known as FTP over SSL/TLS) protocols. Includes automatic directory listing parser for the majority of popular FTP servers on Windows, Unix and Netware platforms. Uses transfer compression (zlib) resulting in 3-4 times faster data transfers.</description>
+    <summary>Ftp.dll is a .NET FTP client library.</summary>
+    <tags>FTP FTPS</tags>
+  </metadata>
+</package>

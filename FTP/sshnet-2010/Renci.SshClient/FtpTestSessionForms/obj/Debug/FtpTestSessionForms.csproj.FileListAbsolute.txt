@@ -1,0 +1,17 @@
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\TreeListViewDragDrop.Form1.resources
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\TreeListViewDragDrop.FormConnection.resources
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\FtpTestSessionForms.csproj.GenerateResource.Cache
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\FtpTestSessionForms.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\FtpTestSessionForms.pdb
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\FtpClientFunc.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\ObjectListView.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\System.Net.FtpClient.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\Renci.SshNet.pdb
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\Renci.SshNet.xml
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\Renci.SshNet.Tests.pdb
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\TreeListViewDragDrop.FormCreateDir.resources
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\FtpTestSessionForms.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\FtpTestSessionForms.pdb
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\Renci.SshNet.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\bin\Debug\Renci.SshNet.Tests.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\FtpTestSessionForms\obj\Debug\FtpTestSessionForms.csprojResolveAssemblyReference.cache

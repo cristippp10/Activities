@@ -1,0 +1,17 @@
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\Renci.SshNet.Silverlight.XML
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\Renci.SshNet.Silverlight.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\Renci.SshNet.Silverlight.pdb
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\Microsoft.CSharp.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\Microsoft.CSharp.xml
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\de\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\es\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\fr\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\it\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\ja\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\ko\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\ru\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\zh-Hans\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\Bin\Debug\zh-Hant\Microsoft.CSharp.resources.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\obj\Debug\Renci.SshNet.Silverlight5.csprojResolveAssemblyReference.cache
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\obj\Debug\Renci.SshNet.Silverlight.dll
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight5\obj\Debug\Renci.SshNet.Silverlight.pdb

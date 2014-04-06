@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>GoogleDriveExplorer.Core</id>
+    <version>1.0.0</version>
+    <authors>ramyhhh</authors>
+    <owners>ramyhhh</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Google drive explorer using GData</description>
+    <tags>Google drive</tags>
+    <dependencies>
+      <dependency id="Google.GData.Documents" version="2.2.0.0" />
+    </dependencies>
+  </metadata>
+</package>

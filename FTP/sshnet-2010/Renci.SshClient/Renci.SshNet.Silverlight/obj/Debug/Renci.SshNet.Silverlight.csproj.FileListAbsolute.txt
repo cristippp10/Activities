@@ -1,0 +1,1 @@
+G:\Program Files (x86)\sshnet-2010\Renci.SshClient\Renci.SshNet.Silverlight\obj\Debug\Renci.SshNet.Silverlight.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+<ad:ActivityDesigner x:Class="FtpActivities.Design.EmptyActivity" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ad="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation" xmlns:aic="clr-namespace:FtpActivities.Design">
+  <ad:ActivityDesigner.Resources>
+    <ResourceDictionary>
+      <aic:ActivityIconConverter x:Key="ActivityIconConverter" />
+    </ResourceDictionary>
+  </ad:ActivityDesigner.Resources>
+  <ad:ActivityDesigner.Icon>
+    <DrawingBrush Stretch="Uniform" Drawing="{Binding Path=ModelItem, Converter={StaticResource ActivityIconConverter}}" />
+  </ad:ActivityDesigner.Icon>
+</ad:ActivityDesigner>

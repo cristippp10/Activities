@@ -1,0 +1,20 @@
+﻿UiPath.Activities.Design
+
+
+library
+C#
+.cs
+G:\Program Files (x86)\UIFtpLlbrary\UiPath.Activities.Design\obj\Debug\
+
+none
+false
+
+
+30-529781259
+
+77984684598
+281161531985
+designers\events\OnClickDesigner.xaml;designers\events\OnKeyDesigner.xaml;designers\events\OnScreenshotDesigner.xaml;controls\ClippingRegionControl.xaml;controls\ComboboxControl.xaml;controls\FilePathControl.xaml;controls\LinkPropertyControl.xaml;designers\BaseContainerDesigner.xaml;designers\BaseTargetDesigner.xaml;designers\control\GetValueDesigner.xaml;designers\control\SelectDesigner.xaml;designers\control\WaitAttributeDesigner.xaml;designers\sftp\SftpListFilesDirSubDirDesigner.xaml;designers\sftp\SftpUploadOneDesigner.xaml;designers\sftp\SftpDownloadMultipleDesigner.xaml;designers\sftp\SftpDownloadOneDesigner.xaml;designers\sftp\SftpDownloadUploadMultipDesigner.xaml;designers\sftp\WithSSHSftpSessionDesigner.xaml;designers\execute\InvokeComMethodDesigner.xaml;designers\execute\InvokePowerShellDesigner.xaml;windows\TextEditorWindow.xaml;designers\dialog\InputDesigner.xaml;designers\dialog\ShowMessageBoxDesign.xaml;designers\EmptyActivity.xaml;designers\ForEachDesigner.xaml;designers\text\ClickStringDesigner.xaml;designers\text\ScrapeDesigner.xaml;designers\text\SetValueOfDesigner.xaml;designers\UiContainerDesigner.xaml;themes\generic.xaml;
+
+True
+

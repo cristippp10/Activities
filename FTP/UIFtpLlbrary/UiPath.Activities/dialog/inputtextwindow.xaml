@@ -1,0 +1,48 @@
+<Window x:Class="FtpActivities.InputTextWindow" Name="InputTextWnd" Width="350" SizeToContent="Height" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="InputTextWnd_Loaded" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Window.Resources>
+    <Style x:Key="InputTextStyle" TargetType="{x:Type TextBox}">
+      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Path=InputPanel, ElementName=InputTextWnd}" Value="InputText">
+          <Setter Property="UIElement.Visibility" Value="Visible" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="ItemsControlStyle" TargetType="{x:Type ItemsControl}">
+      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Path=InputPanel, ElementName=InputTextWnd}" Value="RadioButtons">
+          <Setter Property="UIElement.Visibility" Value="Visible" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}">
+      <Setter Property="UIElement.Visibility" Value="Collapsed" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Path=InputPanel, ElementName=InputTextWnd}" Value="ComboBox">
+          <Setter Property="UIElement.Visibility" Value="Visible" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+  </Window.Resources>
+  <DockPanel LastChildFill="True" Margin="20">
+    <DockPanel DockPanel.Dock="Bottom" Height="23">
+      <Button Content="OK" HorizontalAlignment="Center" Width="75" Click="OKButton_Click" />
+    </DockPanel>
+    <DockPanel DockPanel.Dock="Top">
+      <TextBlock TextWrapping="WrapWithOverflow" DockPanel.Dock="Top" VerticalAlignment="Top" MaxHeight="150" Text="{Binding Path=LabelText, ElementName=InputTextWnd}" />
+      <Grid DockPanel.Dock="Bottom" VerticalAlignment="Top" Margin="0,20">
+        <TextBox Name="InputTextBox" TextWrapping="Wrap" Height="25" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Style="{StaticResource InputTextStyle}" Text="{Binding Path=SelectedValue, ElementName=InputTextWnd}" />
+        <ItemsControl Name="OptionsRadioButtons" Style="{StaticResource ItemsControlStyle}" ItemsSource="{Binding Path=Options, ElementName=InputTextWnd}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <!--<RadioButton x:ConnectionId="5" GroupName="Options" HorizontalAlignment="Left" Margin="0,5,0,0" Content="{Binding}" />-->
+              <RadioButton  GroupName="Options" HorizontalAlignment="Left" Margin="0,5,0,0" Content="{Binding}" />
+             </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <ComboBox Name="OptionsCombobox" Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding Path=Options, ElementName=InputTextWnd}" SelectedValue="{Binding Path=SelectedValue, ElementName=InputTextWnd}" />
+      </Grid>
+    </DockPanel>
+  </DockPanel>
+</Window>

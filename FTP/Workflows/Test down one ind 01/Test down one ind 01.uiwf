@@ -1,0 +1,185 @@
+﻿<Activity mc:Ignorable="sads sap" x:Class="Test_down_one_ind_01" this:Test_down_one_ind_01.Default_TimeoutMS="[30000]" this:Test_down_one_ind_01.Default_ContinueOnError="[False]" this:Test_down_one_ind_01.Default_DelayMS="[300]"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:f="clr-namespace:FtpActivities;assembly=UFtpLibray.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sd1="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:si="clr-namespace:System.IO;assembly=mscorlib"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:sma="clr-namespace:System.Management.Automation;assembly=System.Management.Automation"
+ xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
+ xmlns:sx="clr-namespace:System.Xml;assembly=System.Xml"
+ xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq"
+ xmlns:sxs="clr-namespace:System.Xml.Serialization;assembly=System.Xml"
+ xmlns:this="clr-namespace:"
+ xmlns:ua="clr-namespace:UiPath.Activities;assembly=UiPath.Activities"
+ xmlns:ul="clr-namespace:UiPath.Library;assembly=UiPath.Library"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Default_TimeoutMS" Type="InArgument(x:Int32)" />
+    <x:Property Name="Default_ContinueOnError" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Default_DelayMS" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>451.2,2462.4</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence sap:VirtualizedContainerService.HintSize="411.2,2422.4">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="datatableNotDownloaded" />
+      <Variable x:TypeArguments="sd:DataTable" Name="datatableDownloaded" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <f:SftpDownloadOne ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" FtpSession="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DataTableDownloaded="[datatableDownloaded]" DataTableNotDownloaded="[datatableNotDownloaded]" DisplayName="One file Download" sap:VirtualizedContainerService.HintSize="388.8,112" Host="localhost" LocalPath="G:\Bak\Stream" Port="21" RemotePath="Downloads/[Richard_Siddaway]_PowerShell_in_Practice(BookZa.org).djvu" Sftp="False" ShowScreenshot="False" User="one" User_Pass="one" WorkPath="G:\Bak\Stream">
+      <f:SftpDownloadOne.SKeyFiles>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </f:SftpDownloadOne.SKeyFiles>
+    </f:SftpDownloadOne>
+    <ua:WriteLine DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" ContinueOnError="[Default_ContinueOnError]" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="388.8,59.2" ShowScreenshot="False" Text=" Data Table with Not Downloaded Files: " />
+    <Sequence DisplayName="For Each Cell in DataTable" sap:VirtualizedContainerService.HintSize="388.8,953.6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+        <Variable x:TypeArguments="x:String" Name="dataRow" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign your dataTable" sap:VirtualizedContainerService.HintSize="366.4,60.8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dataTable]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[datatableNotDownloaded]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ua:ForEach x:TypeArguments="sd:DataRow" DisplayName="For each row" sap:VirtualizedContainerService.HintSize="366.4,728" Values="[dataTable.Rows]">
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="336,619.2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Reset row string" sap:VirtualizedContainerService.HintSize="313.6,60.8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+            <ua:ForEach x:TypeArguments="sd:DataColumn" DisplayName="For each column" sap:VirtualizedContainerService.HintSize="313.6,294.4" Values="[dataTable.Columns]">
+              <ActivityAction x:TypeArguments="sd:DataColumn">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="265.6,185.6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Append row string " sap:VirtualizedContainerService.HintSize="243.2,60.8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[dataRow + row(column).ToString + " "]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ua:ForEach>
+            <ua:WriteLine ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="313.6,59.2" ShowScreenshot="False" Text="[dataRow]" />
+          </Sequence>
+        </ActivityAction>
+      </ua:ForEach>
+    </Sequence>
+    <ua:WriteLine DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" ContinueOnError="[Default_ContinueOnError]" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="388.8,59.2" ShowScreenshot="False" Text=" Data Table with Downloaded Files: " />
+    <Sequence DisplayName="For Each Cell in DataTable" sap:VirtualizedContainerService.HintSize="388.8,953.6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+        <Variable x:TypeArguments="x:String" Name="dataRow" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign your dataTable" sap:VirtualizedContainerService.HintSize="315.2,60.8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dataTable]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[datatableDownloaded]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ua:ForEach x:TypeArguments="sd:DataRow" DisplayName="For each row" sap:VirtualizedContainerService.HintSize="315.2,728" Values="[dataTable.Rows]">
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="284.8,619.2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Reset row string" sap:VirtualizedContainerService.HintSize="262.4,60.8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+            <ua:ForEach x:TypeArguments="sd:DataColumn" DisplayName="For each column" sap:VirtualizedContainerService.HintSize="262.4,294.4" Values="[dataTable.Columns]">
+              <ActivityAction x:TypeArguments="sd:DataColumn">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="222.4,185.6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Append row string " sap:VirtualizedContainerService.HintSize="200,60.8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[dataRow + row(column).ToString + " "]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ua:ForEach>
+            <ua:WriteLine ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="262.4,59.2" ShowScreenshot="False" Text="[dataRow]" />
+          </Sequence>
+        </ActivityAction>
+      </ua:ForEach>
+    </Sequence>
+  </Sequence>
+</Activity>

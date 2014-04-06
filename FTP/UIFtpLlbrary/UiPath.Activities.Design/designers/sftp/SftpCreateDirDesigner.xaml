@@ -1,0 +1,45 @@
+<ad:ActivityDesigner x:Class="FtpActivities.Design.SftpCreateDirDesigner" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ad="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation" xmlns:attc="clr-namespace:FtpActivities.Design" xmlns:atec="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation" xmlns:etb="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" xmlns:p="clr-namespace:FtpActivities.Design.Properties"  xmlns:s="clr-namespace:System;assembly=mscorlib" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="175" d:DesignWidth="345">
+  <ad:ActivityDesigner.Resources>
+    <ResourceDictionary>
+      <attc:ArgumentToTextConverter x:Key="ArgumentToTextConverter" />
+      <attc:ActivityIconConverter x:Key="ActivityIconConverter" />
+      <atec:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+      <attc:VariableActivityDisplayConverter x:Key="VariableActivityDisplayConverter" />
+      <Style x:Key="NoExistingStyle">
+        <Setter Property="UIElement.Visibility" Value="Visible" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding Path=ModelItem.LocalPath}" Value="{x:Null}">
+            <Setter Property="UIElement.Visibility" Value="Collapsed" />
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+      <Style x:Key="NoWorkbookStyle">
+        <Setter Property="UIElement.Visibility" Value="Collapsed" />
+        <Style.Triggers>
+          <DataTrigger Binding="{Binding Path=ModelItem.LocalPath}" Value="{x:Null}">
+            <Setter Property="UIElement.Visibility" Value="Visible" />
+          </DataTrigger>
+        </Style.Triggers>
+      </Style>
+    </ResourceDictionary>
+  </ad:ActivityDesigner.Resources>
+  <ad:ActivityDesigner.Icon>
+    <DrawingBrush Stretch="Uniform" Drawing="{Binding Path=ModelItem, Converter={StaticResource ActivityIconConverter}}" />
+  </ad:ActivityDesigner.Icon>
+  <!--<attc:ActivityDecoratorControl>-->
+    <DockPanel LastChildFill="True" Width="330" Height="133">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Top" Height="38" Width="307">
+            <Button Content="Configuration" Height="20" Name="btnConnection" Width="79" Click="LoadButton_Click" DockPanel.Dock="Left" />
+            <TextBox Height="28" Name="tbxConnection" Width="259" Text="Connection  info" IsEnabled="False" Visibility="Collapsed" />
+        </DockPanel>
+        <DockPanel Margin="0, 5, 0, 0" LastChildFill="True" DockPanel.Dock="Top" Width="321" Height="39">
+            <Label Content="DirName" Height="27" Name="labellocal" DockPanel.Dock="Left" Width="45" Padding="0" />
+            <etb:ExpressionTextBox ExpressionType="{x:Type s:String}" DockPanel.Dock="Left" HintText="Dir Name" Margin="0,0,2,0" OwnerActivity="{Binding Path=ModelItem}" Expression="{Binding Path=ModelItem.NewDirName, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In, Mode=TwoWay}" Height="26" Width="261" />
+        </DockPanel>
+        <DockPanel Margin="0, 5, 0, 0" LastChildFill="True" DockPanel.Dock="Top" Height="35" Width="321">
+            <Label Content="Remote" Height="31" Name="labelremote" DockPanel.Dock="Left" Width="45" Padding="0" />
+            <etb:ExpressionTextBox ExpressionType="{x:Type s:String}" DockPanel.Dock="Left" HintText="Remote Path" Margin="0,0,2,0" OwnerActivity="{Binding Path=ModelItem}" Expression="{Binding Path=ModelItem.RemotePath, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In, Mode=TwoWay}" Height="26" Width="259" />
+        </DockPanel>
+    </DockPanel>
+    <!--</attc:ActivityDecoratorControl>-->
+</ad:ActivityDesigner>

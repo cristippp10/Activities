@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{FE45B256-1DFD-4FB3-B9E7-8B26CF3F3CFF}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>UFtpLibray.Activities</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FtpClientFunc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FtpClientFunc.dll</HintPath>
+    </Reference>
+    <Reference Include="FtpTestSessionForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FtpTestSessionForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2013.4.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet.Tests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Renci.SshNet.Tests.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Activities" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Net.FtpClient, Version=1.0.5167.38163, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.FtpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="UiPath.Library" />
+    <Reference Include="System.Data" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="itextsharp" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="Newtonsoft.Json" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="RestSharp" />
+    <Reference Include="System.Management.Automation" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="NLog" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="S22.Imap" />
+    <Reference Include="S22.Pop3" />
+    <Reference Include="Twilio.Api" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="UFtpLibray.Activities.Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities.Properties\Settings.cs" />
+    <Compile Include="UFtpLibray.Activitiess.Utilities\PermissionAttribute.cs" />
+    <Compile Include="UFtpLibray.Activitiess.Utilities\PermissionExtensions.cs" />
+    <Compile Include="UFtpLibray.Activities\ActivityTimeoutException.cs" />
+    <Compile Include="UFtpLibray.Activities\AppLog.cs" />
+    <Compile Include="UFtpLibray.Activities\AsyncNativeActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseBrowserActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseClickActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseContainerActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseElementActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseElementContainerActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseEventsActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseHoverActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseSelectorActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseSelectorEventsActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseType.cs" />
+    <Compile Include="UFtpLibray.Activities\BaseWindow.cs" />
+    <Compile Include="UFtpLibray.Activities\BookmarkResumptionHelper.cs" />
+    <Compile Include="UFtpLibray.Activities\ButtonOptions.cs" />
+    <Compile Include="UFtpLibray.Activities\CheckpointException.cs" />
+    <Compile Include="UFtpLibray.Activities\CheckType.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpDisconnect.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpUploadMultiple.cs" />
+    <Compile Include="UFtpLibray.Activities\WithSShSftpSession2.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpCreateDir.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpDeleteFile.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpRemoveDir.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpFileExists.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpDirExists.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpListFilesDir.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpListFilesDirSubDir.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpUploadOne.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpDownloadMultiple.cs" />
+    <Compile Include="UFtpLibray.Activities\CurentLogLevel.cs" />
+    <Compile Include="UFtpLibray.Activities\DelimitatorOptions.cs" />
+    <Compile Include="UFtpLibray.Activities\DynamicObject.cs" />
+    <Compile Include="UFtpLibray.Activities\DynamicProxy.cs" />
+    <Compile Include="UFtpLibray.Activities\DynamicProxyFactory.cs" />
+    <Compile Include="UFtpLibray.Activities\DynamicProxyFactoryOptions.cs" />
+    <Compile Include="UFtpLibray.Activities\ErrorMessages.cs" />
+    <Compile Include="UFtpLibray.Activities\ExtensionMethods.cs" />
+    <Compile Include="UFtpLibray.Activities\FtpSeesionGen.cs" />
+    <Compile Include="UFtpLibray.Activities\IBaseElementActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\IBaseSelectorActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\IContainerActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\IFileReader.cs" />
+    <Compile Include="UFtpLibray.Activities\InputTextWindow.cs" />
+    <Compile Include="UFtpLibray.Activities\IPSHelper.cs" />
+    <Compile Include="UFtpLibray.Activities\IScreenshotActivity.cs" />
+    <Compile Include="UFtpLibray.Activities\PathType.cs" />
+    <Compile Include="UFtpLibray.Activities\PermissionException.cs" />
+    <Compile Include="UFtpLibray.Activities\PipelineInvokerAsyncResult.cs" />
+    <Compile Include="UFtpLibray.Activities\ProxyCodeModifier.cs" />
+    <Compile Include="UFtpLibray.Activities\ProxyErrorMessages.cs" />
+    <Compile Include="UFtpLibray.Activities\ProxyException.cs" />
+    <Compile Include="UFtpLibray.Activities\ReadMethod.cs" />
+    <Compile Include="UFtpLibray.Activities\RegistrationException.cs" />
+    <Compile Include="UFtpLibray.Activities\SelectorException.cs" />
+    <Compile Include="UFtpLibray.Activities\SendMessageTimeoutFlags.cs" />
+    <Compile Include="UFtpLibray.Activities\SftpDownloadOne.cs" />
+    <Compile Include="UFtpLibray.Activities\UiMonitorExtension.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities\WithSShSftpSession.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UiPath.Activities.Design\UFtpLibray.Activities.Design.csproj">
+      <Project>{138BA1AC-82C4-465B-9F58-E01414B3F3D0}</Project>
+      <Name>UFtpLibray.Activities.Design</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="dialog\inputtextwindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UFtpLibray.Activities.Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

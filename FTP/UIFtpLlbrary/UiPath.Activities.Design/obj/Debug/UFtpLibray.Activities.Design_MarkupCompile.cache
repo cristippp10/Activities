@@ -1,0 +1,20 @@
+﻿UFtpLibray.Activities.Design
+
+
+library
+C#
+.cs
+G:\Program Files (x86)\UIFtpLlbrary\UiPath.Activities.Design\obj\Debug\
+
+none
+false
+
+
+271344538455
+
+50-2070405406
+24-102526726
+controls\ClippingRegionControl.xaml;controls\ComboboxControl.xaml;controls\FilePathControl.xaml;controls\InOutControl.xaml;controls\LinkPropertyControl.xaml;controls\TextEditorWindow.xaml;designers\BaseContainerDesigner.xaml;designers\BaseTargetDesigner.xaml;designers\control\GetValueDesigner.xaml;designers\control\SelectDesigner.xaml;designers\control\WaitAttributeDesigner.xaml;designers\sftp\WithSSHSftpSessionDesigner2.xaml;designers\sftp\SftpCreateDirDesigner.xaml;designers\sftp\SftpListFilesDirSubDirDesigner.xaml;designers\sftp\SftpUploadOneDesigner.xaml;designers\sftp\SftpDownloadMultipleDesigner.xaml;designers\sftp\SftpDownloadOneDesigner.xaml;designers\sftp\SftpDownloadUploadMultipDesigner.xaml;designers\sftp\WithSSHSftpSessionDesigner.xaml;designers\dialog\InputDesigner.xaml;designers\dialog\ShowMessageBoxDesign.xaml;designers\EmptyActivity.xaml;designers\ForEachDesigner.xaml;designers\text\ClickStringDesigner.xaml;designers\text\SetValueOfDesigner.xaml;designers\UiContainerDesigner.xaml;themes\generic.xaml;
+
+False
+

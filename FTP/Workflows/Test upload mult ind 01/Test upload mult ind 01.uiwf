@@ -1,0 +1,185 @@
+﻿<Activity mc:Ignorable="sads sap" x:Class="Test_upload_mult_ind_01" this:Test_upload_mult_ind_01.Default_TimeoutMS="[30000]" this:Test_upload_mult_ind_01.Default_ContinueOnError="[False]" this:Test_upload_mult_ind_01.Default_DelayMS="[300]"
+ xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
+ xmlns:f="clr-namespace:FtpActivities;assembly=UFtpLibray.Activities"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=Microsoft.VisualBasic"
+ xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
+ xmlns:s="clr-namespace:System;assembly=mscorlib"
+ xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities"
+ xmlns:sads="http://schemas.microsoft.com/netfx/2010/xaml/activities/debugger"
+ xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation"
+ xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib"
+ xmlns:sd="clr-namespace:System.Data;assembly=System.Data"
+ xmlns:sd1="clr-namespace:System.Diagnostics;assembly=System"
+ xmlns:si="clr-namespace:System.IO;assembly=mscorlib"
+ xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
+ xmlns:sma="clr-namespace:System.Management.Automation;assembly=System.Management.Automation"
+ xmlns:snm="clr-namespace:System.Net.Mail;assembly=System"
+ xmlns:sx="clr-namespace:System.Xml;assembly=System.Xml"
+ xmlns:sxl="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq"
+ xmlns:sxs="clr-namespace:System.Xml.Serialization;assembly=System.Xml"
+ xmlns:this="clr-namespace:"
+ xmlns:ua="clr-namespace:UiPath.Activities;assembly=UiPath.Activities"
+ xmlns:ul="clr-namespace:UiPath.Library;assembly=UiPath.Library"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="Default_TimeoutMS" Type="InArgument(x:Int32)" />
+    <x:Property Name="Default_ContinueOnError" Type="InArgument(x:Boolean)" />
+    <x:Property Name="Default_DelayMS" Type="InArgument(x:Int32)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>451.2,2520</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Sequence sap:VirtualizedContainerService.HintSize="411.2,2480">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="datatableNotUploaded" />
+      <Variable x:TypeArguments="sd:DataTable" Name="datatableUploaded" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <f:SftpUploadMultiple ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" FilesListNotUploaded="{x:Null}" FilesListUploaded="{x:Null}" FtpSession="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DataTableNotUploaded="[datatableNotUploaded]" DataTableUploaded="[datatableUploaded]" sap:VirtualizedContainerService.HintSize="388.8,169.6" Host="localhost" LocalPath="G:\Bak\Download\RevolutionFrancaise\a589652600lameuoft.djvu|G:\Bak\Download\RevolutionFrancaise\anthineadathne00mauruoft.djvu|G:\Bak\Download\RevolutionFrancaise\athnesantique00maur.djvu|G:\Bak\Download\RevolutionFrancaise\bpt6k57547726 gustave bord .epub|G:\Bak\Download\RevolutionFrancaise\chateaubriand02fran.djvu|G:\Bak\Download\RevolutionFrancaise\codedelanatureou00moreuoft.djvu|G:\Bak\Download\RevolutionFrancaise\considrations01sta.djvu|G:\Bak\Download\RevolutionFrancaise\considrationss00bonauoft.djvu|G:\Bak\Download\RevolutionFrancaise\considrationss00maisuoft.djvu|G:\Bak\Download\RevolutionFrancaise\considrationss02sta.djvu|G:\Bak\Download\RevolutionFrancaise\dantonlouis00madeuoft.djvu|G:\Bak\Download\RevolutionFrancaise\descirconstances00stauoft.djvu|G:\Bak\Download\RevolutionFrancaise\dessocitssecrte00lombgoog.djvu|G:\Bak\Download\RevolutionFrancaise\De_l_Unité_spirituelle_ou_de_la_sociét (1).pdf|G:\Bak\Download\RevolutionFrancaise\De_l_Unité_spirituelle_ou_de_la_sociét (2).pdf|G:\Bak\Download\RevolutionFrancaise\De_l_Unité_spirituelle_ou_de_la_sociét.pdf|G:\Bak\Download\RevolutionFrancaise\discoursdelegend00lege.djvu|G:\Bak\Download\RevolutionFrancaise\Du_système_de_dépopulation_ou_la_vie_e.pdf|G:\Bak\Download\RevolutionFrancaise\Esprit_de_la_révolution_et_de_la_consti.pdf|G:\Bak\Download\RevolutionFrancaise\essaisurlecathol00dono.djvu|G:\Bak\Download\RevolutionFrancaise\fouch1759182000made.djvu|G:\Bak\Download\RevolutionFrancaise\frenchrevolution00mademiss.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredelaconj01gala.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredelaconj02gala.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredelaconj03gala.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredesgironv1v2lama.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredesgironv3v4lama.djvu|G:\Bak\Download\RevolutionFrancaise\histoiredessoci00didigoog.djvu|G:\Bak\Download\RevolutionFrancaise\histoirepolitiqu00aular.djvu|G:\Bak\Download\RevolutionFrancaise\histoirereligieu01lago.djvu|G:\Bak\Download\RevolutionFrancaise\histoirereligieu02lago.djvu|G:\Bak\Download\RevolutionFrancaise\histoirereligieu03lago.djvu|G:\Bak\Download\RevolutionFrancaise\histoirereligieu04lago.djvu|G:\Bak\Download\RevolutionFrancaise\histoirereligieu05lago.djvu|G:\Bak\Download\RevolutionFrancaise\histoiresocialis03jauruoft.djvu|G:\Bak\Download\RevolutionFrancaise\histoiresocialis04jauruoft.djvu|G:\Bak\Download\RevolutionFrancaise\histoiresocialis05jauruoft.djvu|G:\Bak\Download\RevolutionFrancaise\Histoire_des_jacobins_depuis_1789_jusqua LOMBARD DE LANGRES .pdf|G:\Bak\Download\RevolutionFrancaise\Histoire_de_France_pendant_trois_mois_pa.pdf|G:\Bak\Download\RevolutionFrancaise\inscriptions00maur.djvu|G:\Bak\Download\RevolutionFrancaise\jbcarrierreprs00lall.djvu|G:\Bak\Download\RevolutionFrancaise\josephdemaistreb00barb.djvu|G:\Bak\Download\RevolutionFrancaise\journaldeclryd00cl.djvu|G:\Bak\Download\RevolutionFrancaise\journaldeclryp00cluoft.djvu" Port="21" RemotePath="DownloadTest" Sftp="False" ShowScreenshot="False" User="one" User_Pass="one" WorkPath="G:\Bak">
+      <f:SftpUploadMultiple.SKeyFiles>
+        <InArgument x:TypeArguments="x:String">
+          <Literal x:TypeArguments="x:String" Value="" />
+        </InArgument>
+      </f:SftpUploadMultiple.SKeyFiles>
+    </f:SftpUploadMultiple>
+    <ua:WriteLine DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" ContinueOnError="[Default_ContinueOnError]" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="388.8,59.2" ShowScreenshot="False" Text=" Data Table with Not uploaded Files: " />
+    <Sequence DisplayName="For Each Cell in DataTable" sap:VirtualizedContainerService.HintSize="388.8,953.6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+        <Variable x:TypeArguments="x:String" Name="dataRow" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign your dataTable" sap:VirtualizedContainerService.HintSize="366.4,60.8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dataTable]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[datatableNotUploaded]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ua:ForEach x:TypeArguments="sd:DataRow" DisplayName="For each row" sap:VirtualizedContainerService.HintSize="366.4,728" Values="[dataTable.Rows]">
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="336,619.2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Reset row string" sap:VirtualizedContainerService.HintSize="313.6,60.8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+            <ua:ForEach x:TypeArguments="sd:DataColumn" DisplayName="For each column" sap:VirtualizedContainerService.HintSize="313.6,294.4" Values="[dataTable.Columns]">
+              <ActivityAction x:TypeArguments="sd:DataColumn">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="265.6,185.6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Append row string " sap:VirtualizedContainerService.HintSize="243.2,60.8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[dataRow + row(column).ToString + " "]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ua:ForEach>
+            <ua:WriteLine ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="313.6,59.2" ShowScreenshot="False" Text="[dataRow]" />
+          </Sequence>
+        </ActivityAction>
+      </ua:ForEach>
+    </Sequence>
+    <ua:WriteLine DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" ContinueOnError="[Default_ContinueOnError]" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="388.8,59.2" ShowScreenshot="False" Text=" Data Table with Uploaded Files: " />
+    <Sequence DisplayName="For Each Cell in DataTable" sap:VirtualizedContainerService.HintSize="388.8,953.6">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="sd:DataTable" Name="dataTable" />
+        <Variable x:TypeArguments="x:String" Name="dataRow" />
+      </Sequence.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <Assign DisplayName="Assign your dataTable" sap:VirtualizedContainerService.HintSize="366.4,60.8">
+        <Assign.To>
+          <OutArgument x:TypeArguments="sd:DataTable">[dataTable]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="sd:DataTable">[datatableUploaded]</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ua:ForEach x:TypeArguments="sd:DataRow" DisplayName="For each row" sap:VirtualizedContainerService.HintSize="366.4,728" Values="[dataTable.Rows]">
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="336,619.2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Reset row string" sap:VirtualizedContainerService.HintSize="313.6,60.8">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">
+                  <Literal x:TypeArguments="x:String" Value="" />
+                </InArgument>
+              </Assign.Value>
+            </Assign>
+            <ua:ForEach x:TypeArguments="sd:DataColumn" DisplayName="For each column" sap:VirtualizedContainerService.HintSize="313.6,294.4" Values="[dataTable.Columns]">
+              <ActivityAction x:TypeArguments="sd:DataColumn">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataColumn" Name="column" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="265.6,185.6">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Append row string " sap:VirtualizedContainerService.HintSize="243.2,60.8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[dataRow]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[dataRow + row(column).ToString + " "]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </ActivityAction>
+            </ua:ForEach>
+            <ua:WriteLine ContinueOnError="{x:Null}" DesignerSelector="{x:Null}" ElementPosition="{x:Null}" ImageBase64="{x:Null}" InformativeScreenshot="{x:Null}" ParentImageBase64="{x:Null}" DisplayName="Write line" sap:VirtualizedContainerService.HintSize="313.6,59.2" ShowScreenshot="False" Text="[dataRow]" />
+          </Sequence>
+        </ActivityAction>
+      </ua:ForEach>
+    </Sequence>
+  </Sequence>
+</Activity>

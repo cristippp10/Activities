@@ -1,0 +1,17 @@
+<ad:ActivityDesigner x:Class="FtpActivities.Design.ShowMessageBoxDesign" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ad="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation" xmlns:atec="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation" xmlns:aic="clr-namespace:FtpActivities.Design" xmlns:etb="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" xmlns:p="clr-namespace:FtpActivities.Design.Properties" xmlns:s="clr-namespace:System;assembly=mscorlib">
+  <ad:ActivityDesigner.Resources>
+    <ResourceDictionary>
+      <atec:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+      <aic:ActivityIconConverter x:Key="ActivityIconConverter" />
+    </ResourceDictionary>
+  </ad:ActivityDesigner.Resources>
+  <ad:ActivityDesigner.Icon>
+    <DrawingBrush Stretch="Uniform" Drawing="{Binding Path=ModelItem, Converter={StaticResource ActivityIconConverter}}" />
+  </ad:ActivityDesigner.Icon>
+  <!--<aic:ActivityDecoratorControl>-->
+    <DockPanel LastChildFill="True" Width="{Binding Source={x:Static p:Resources.SimpleActivitiesWidth}, Mode=OneWay}">
+      <aic:LinkPropertyControl x:Name="TextSetter" MenuItemLabel="Use a string stored in a variable" VariableType="{x:Type s:String}" PropertyName="Text" DockPanel.Dock="Right" ModelItem="{Binding ModelItem}" />
+      <etb:ExpressionTextBox Name="TextInputBox" ExpressionType="{x:Type s:String}" DockPanel.Dock="Right" HintText="Text must be quoted" OwnerActivity="{Binding Path=ModelItem}" Expression="{Binding Path=ModelItem.Text, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" />
+    </DockPanel>
+  <!--</aic:ActivityDecoratorControl>-->
+</ad:ActivityDesigner>

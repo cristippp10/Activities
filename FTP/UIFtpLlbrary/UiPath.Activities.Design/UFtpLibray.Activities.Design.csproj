@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{138BA1AC-82C4-465B-9F58-E01414B3F3D0}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>UFtpLibray.Activities.Design</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FtpTestSessionForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\FtpTestSessionForms.dll</HintPath>
+    </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>bin\ObjectListView.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.FtpClient, Version=1.0.5167.38163, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Net.FtpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="UiPath.Library, Version=7.1.5103.498, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\UiPath Studio\v7\UiPath\UiPath.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="UiPath.Wizards">
+      <HintPath>bin\UiPath.Wizards.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Activities.Presentation" />
+    <Reference Include="System" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Management.Automation" />
+    <Reference Include="System.Activities.Core.Presentation" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="controls\FilePathControl.xaml.cs">
+      <DependentUpon>FilePathControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="controls\InOutControl.cs" />
+    <Compile Include="controls\LinkPropertyControl.xaml.cs">
+      <DependentUpon>LinkPropertyControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\WithSSHSftpSessionDesigner2.xaml.cs">
+      <DependentUpon>WithSSHSftpSessionDesigner2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpCreateDirDesigner.xaml.cs">
+      <DependentUpon>SftpCreateDirDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpListFilesDirSubDirDesigner.xaml.cs">
+      <DependentUpon>SftpListFilesDirSubDirDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpUploadOneDesigner.xaml.cs">
+      <DependentUpon>SftpUploadOneDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpDownloadMultipleDesigner.xaml.cs">
+      <DependentUpon>SftpDownloadMultipleDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpDownloadOneDesigner.xaml.cs">
+      <DependentUpon>SftpDownloadOneDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\SftpDownloadUploadMultipDesigner.xaml.cs">
+      <DependentUpon>SftpDownloadUploadMultipDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="designers\sftp\WithSSHSftpSessionDesigner.xaml.cs">
+      <DependentUpon>WithSSHSftpSessionDesigner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities.Design\TargetHelper.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\TextEditorWindow.cs" />
+    <Compile Include="UFtpLibray.Activities.Design.Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities.Design.Properties\Settings.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ActivityDecoratorControl.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ActivityDescriptionConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ActivityIconConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\AppendLineDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ArgumentDictionaryEditor.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ArgumentToTextConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\BaseContainerDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\BaseTargetDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ClippingRegionControl.cs" />
+    <Compile Include="controls\ComboboxControl.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\CommentDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\DesignerSettings.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\EditorResources.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\EmptyActivity.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ExecuteXamlWorkflowDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ForEachDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\GetValueDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ImageFromBase64Converter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\InArgumentToBoolConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\InputDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\LogDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\MoveWindowDirection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities.Design\RegionEditor.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\SelectDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\SelectorToAttributesConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\SetTextToClipboardDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\SetValueOfDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\ShowMessageBoxDesign.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\TextEditor.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\UiContainerDesigner.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UFtpLibray.Activities.Design\VariableActivityPair.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\VariableToTextConverter.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\WaitAttributeDesigner.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\XmlEditor.cs" />
+    <Compile Include="UFtpLibray.Activities.Design\VariableActivityDisplayConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UFtpLibray.Activities.Design.Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="controls\ClippingRegionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="controls\ComboboxControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="controls\FilePathControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\InOutControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\LinkPropertyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\TextEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\BaseContainerDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="designers\BaseTargetDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="designers\control\GetValueDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\control\SelectDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\control\WaitAttributeDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\WithSSHSftpSessionDesigner2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpCreateDirDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpListFilesDirSubDirDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpUploadOneDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpDownloadMultipleDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpDownloadOneDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\SftpDownloadUploadMultipDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\sftp\WithSSHSftpSessionDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\dialog\InputDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\dialog\ShowMessageBoxDesign.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\EmptyActivity.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="designers\ForEachDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="designers\text\ClickStringDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\text\SetValueOfDesigner.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="designers\UiContainerDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="editors\EditorResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="themes\icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

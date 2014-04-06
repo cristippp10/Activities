@@ -1,0 +1,90 @@
+<ResourceDictionary x:Class="FtpActivities.Design.EditorResources" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mpetmic="clr-namespace:System.Activities.Presentation.Converters;assembly=System.Activities.Presentation" xmlns:attc="clr-namespace:FtpActivities.Design;assembly=FtpActivities.Design,Version=7.1.5103.505,Culture=neutral,PublicKeyToken=null" xmlns:emsb="clr-namespace:System.Activities.Presentation.PropertyEditing;assembly=System.Activities.Presentation" xmlns:etb="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation">
+  <DataTemplate x:Key="OCRLanguageCombobox">
+    <DataTemplate.Resources>
+      <mpetmic:ModelPropertyEntryToModelItemConverter x:Key="ModelPropertyEntryToModelItemConverter" />
+    </DataTemplate.Resources>
+    <!--<ComboBox x:ConnectionId="1" Tag="{Binding Path=ModelItem}" DataContext="{Binding Converter={StaticResource ModelPropertyEntryToModelItemConverter}}" />-->
+    <ComboBox Tag="{Binding Path=ModelItem}" DataContext="{Binding Converter={StaticResource ModelPropertyEntryToModelItemConverter}}" />
+    </DataTemplate>
+  <DataTemplate x:Key="SelectorTool">
+    <DataTemplate.Resources>
+      <mpetmic:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+      <mpetmic:ModelPropertyEntryToModelItemConverter x:Key="ModelPropertyEntryToModelItemConverter" />
+      <attc:ArgumentToTextConverter x:Key="ArgumentToTextConverter" />
+    </DataTemplate.Resources>
+    <DockPanel LastChildFill="True" DataContext="{Binding Converter={StaticResource ModelPropertyEntryToModelItemConverter}}">
+      <emsb:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <etb:ExpressionTextBox Name="SelectorTextBox" ExpressionType="{x:Type s:String}" MaxLines="1" OwnerActivity="{Binding Path=ModelItem}" Expression="{Binding Path=ModelItem.Selector, Mode=TwoWay, Converter={StaticResource ArgumentToExpressionConverter}, ConverterParameter=In}" ToolTip="{Binding Path=ModelItem.Selector, Converter={StaticResource ArgumentToTextConverter}, Mode=OneWay}" />
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="ArgumentDictionaryEditor">
+    <DockPanel LastChildFill="True">
+      <emsb:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <TextBlock Text="(Collection)" TextTrimming="CharacterEllipsis" />
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="RegionEditor">
+    <DataTemplate.Resources>
+      <attc:RegionToTextConverter x:Key="RegionToTextConverter" />
+    </DataTemplate.Resources>
+    <DockPanel LastChildFill="True">
+      <emsb:EditModeSwitchButton HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <TextBox Name="RegionText" MaxLines="1" Text="{Binding Path=Value, Mode=TwoWay, Converter={StaticResource RegionToTextConverter}}" />
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="RegionExtendedEditorTemplate">
+    <DataTemplate.Resources>
+      <attc:RegionToTextConverter x:Key="RegionToTextConverter" />
+    </DataTemplate.Resources>
+    <attc:ClippingRegionControl Background="#FFFFFFFF" ClippingRegionControl.Text="{Binding Path=Value, Mode=TwoWay, Converter={StaticResource RegionToTextConverter}, BindsDirectlyToSource=True, NotifyOnTargetUpdated=True}" />
+  </DataTemplate>
+  <DataTemplate x:Key="XmlEditorTemplate">
+    <DataTemplate.Resources>
+      <mpetmic:ModelPropertyEntryToOwnerActivityConverter x:Key="ModelPropertyEntryToOwnerActivityConverter" />
+      <mpetmic:ArgumentToExpressionModelItemConverter x:Key="ArgumentToExpressionModelItemConverter" />
+    </DataTemplate.Resources>
+    <DockPanel LastChildFill="True">
+      <emsb:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <etb:ExpressionTextBox ExpressionType="{x:Type s:String}" MaxLines="1" OwnerActivity="{Binding Path=ParentProperty, Mode=OneWay, Converter={StaticResource ModelPropertyEntryToOwnerActivityConverter}}">
+        <etb:ExpressionTextBox.Expression>
+          <MultiBinding Mode="TwoWay" Converter="{StaticResource ArgumentToExpressionModelItemConverter}" ConverterParameter="In">
+            <Binding Path="Value" Mode="TwoWay" />
+            <Binding Path="ParentProperty" Mode="OneWay" />
+          </MultiBinding>
+        </etb:ExpressionTextBox.Expression>
+      </etb:ExpressionTextBox>
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="PasswordEditorTemplate">
+    <DataTemplate.Resources>
+      <attc:ArgumentToTextConverter x:Key="ArgumentToTextConverter" />
+    </DataTemplate.Resources>
+    <DockPanel LastChildFill="True">
+      <PasswordBox Name="EmailPassword" p10:PasswordBoxAssistant.BindPassword="True" p10:PasswordBoxAssistant.BoundPassword="{Binding Path=Value, Mode=TwoWay, Converter={StaticResource ArgumentToTextConverter}, UpdateSourceTrigger=PropertyChanged}" xmlns:p10="clr-namespace:UiPath.Workflow.Wizards;assembly=UiPath.Wizards" />
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="DatabaseConnectionEditorTemplate">
+    <DataTemplate.Resources>
+      <mpetmic:ArgumentToExpressionConverter x:Key="ArgumentToExpressionConverter" />
+      <mpetmic:ModelPropertyEntryToOwnerActivityConverter x:Key="ModelPropertyEntryToOwnerActivityConverter" />
+      <mpetmic:ArgumentToExpressionModelItemConverter x:Key="ArgumentToExpressionModelItemConverter" />
+    </DataTemplate.Resources>
+    <DockPanel LastChildFill="True">
+      <emsb:EditModeSwitchButton TargetEditMode="Dialog" HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <etb:ExpressionTextBox ExpressionType="{x:Type s:String}" MaxLines="1" HintText="Set connection information" OwnerActivity="{Binding Path=ParentProperty, Mode=OneWay, Converter={StaticResource ModelPropertyEntryToOwnerActivityConverter}}">
+        <etb:ExpressionTextBox.Expression>
+          <MultiBinding Mode="TwoWay" Converter="{StaticResource ArgumentToExpressionModelItemConverter}" ConverterParameter="In">
+            <Binding Path="Value" Mode="TwoWay" />
+            <Binding Path="ParentProperty" Mode="OneWay" />
+          </MultiBinding>
+        </etb:ExpressionTextBox.Expression>
+      </etb:ExpressionTextBox>
+    </DockPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="TextEditorTemplate">
+    <DockPanel LastChildFill="True">
+      <emsb:EditModeSwitchButton HorizontalAlignment="Right" DockPanel.Dock="Right" />
+      <TextBox Name="Text" MaxLines="1" AcceptsReturn="True" Text="{Binding Path=Value, Mode=TwoWay}" />
+    </DockPanel>
+  </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,16 @@
+<ad:ActivityDesigner x:Class="FtpActivities.Design.BaseContainerDesigner" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ad="clr-namespace:System.Activities.Presentation;assembly=System.Activities.Presentation" xmlns:aic="clr-namespace:FtpActivities.Design" xmlns:sa="clr-namespace:System.Activities;assembly=System.Activities">
+  <ad:ActivityDesigner.Resources>
+    <ResourceDictionary>
+      <aic:ActivityIconConverter x:Key="ActivityIconConverter" />
+    </ResourceDictionary>
+  </ad:ActivityDesigner.Resources>
+  <ad:ActivityDesigner.Icon>
+    <DrawingBrush Stretch="Uniform" Drawing="{Binding Path=ModelItem, Converter={StaticResource ActivityIconConverter}}" />
+  </ad:ActivityDesigner.Icon>
+  <aic:ActivityDecoratorControl>
+    <Border x:Uid="Border_1" BorderThickness="1">
+      <!--<ad:WorkflowItemPresenter x:Uid="sad:WorkflowItemPresenter_1" AutomationProperties.AutomationId="Body" AllowedItemType="{x:Type sa:Activity}" HorizontalAlignment="Center" HintText="Drop activity here" Item="{Binding Path=ModelItem.Body, Mode=TwoWay}" MinWidth="{Binding Source={x:Static p:Resources.BaseActivitiesWidth}, Mode=OneWay}" />-->
+      <ad:WorkflowItemPresenter x:Uid="sad:WorkflowItemPresenter_1" AutomationProperties.AutomationId="Body" AllowedItemType="{x:Type sa:Activity}" HorizontalAlignment="Center" HintText="Drop activity here" Item="{Binding Path=ModelItem.Body, Mode=TwoWay}" />
+        </Border>
+  </aic:ActivityDecoratorControl>
+</ad:ActivityDesigner>

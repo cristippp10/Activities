@@ -1,0 +1,46 @@
+<UserControl x:Class="FtpActivities.Design.ComboboxControl" Name="Combobox" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lpc="clr-namespace:FtpActivities.Design" xmlns:etb="clr-namespace:System.Activities.Presentation.View;assembly=System.Activities.Presentation" xmlns:s="clr-namespace:System;assembly=mscorlib" >
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+      <Style x:Key="{x:Type Button}" BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="{x:Type Button}">
+        <Setter Property="Control.BorderThickness" Value="1" />
+        <Setter Property="Control.BorderBrush" Value="#FFD0D7E2" />
+        <Setter Property="FrameworkElement.Height" Value="23" />
+      </Style>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <Grid>
+    <DockPanel LastChildFill="True" VerticalAlignment="Center">
+      <lpc:LinkPropertyControl x:Name="TextSetter" MenuItemLabel="Use a string stored in a variable" DockPanel.Dock="Right" VariableType="{x:Type s:String}" ModelItem="{Binding ModelItem}" PropertyName="{Binding PropertyName}" />
+      <DockPanel LastChildFill="True">
+        <Button DockPanel.Dock="Right" Width="18" Height="23" Click="Button_Click">
+          <Button.Content>
+            <Path Name="Arrow" Data="{StaticResource DownArrowGeometry}" Fill="#FF000000" HorizontalAlignment="Center" Margin="3,1,3,0" VerticalAlignment="Center" />
+          </Button.Content>
+          <Button.Style>
+            <Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="{x:Type Button}">
+              <Setter Property="Control.BorderThickness" Value="1" />
+              <Setter Property="Control.BorderBrush" Value="#FFD0D7E2" />
+              <Setter Property="Control.Background" Value="{x:Null}" />
+            </Style>
+          </Button.Style>
+        </Button>
+        <ComboBox Name="PropertiesComboBox" Width="0" DockPanel.Dock="Left" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemsSource="{Binding Path=ItemsSource, ElementName=Combobox, Mode=TwoWay}" SelectionChanged="PropertiesComboBox_SelectionChanged">
+          <ComboBox.ItemTemplate>
+            <DataTemplate>
+              <Grid>
+                <TextBlock Text="{Binding}" Width="{Binding ActualWidth, ElementName=ComboboxInputBox, Mode=OneWay}" />
+              </Grid>
+            </DataTemplate>
+          </ComboBox.ItemTemplate>
+          <ComboBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel Width="{Binding ActualWidth, ElementName=ComboboxInputBox, Mode=OneWay}" />
+            </ItemsPanelTemplate>
+          </ComboBox.ItemsPanel>
+        </ComboBox>
+        <etb:ExpressionTextBox Name="ComboboxInputBox" DockPanel.Dock="Left" MaxLines="1" ExpressionType="{x:Type s:String}" OwnerActivity="{Binding ModelItem}" HintText="{Binding HintText, ElementName=Combobox}" Expression="{Binding SelectedItem, ElementName=Combobox}" />
+      </DockPanel>
+    </DockPanel>
+  </Grid>
+</UserControl>
