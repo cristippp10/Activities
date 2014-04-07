@@ -156,6 +156,26 @@ namespace FtpActivities
 		}
         
         FtpSessionGen sessiongen = null;
+        //string localPath = "";
+        //string remotePath = "";
+
+       
+        //ThreadStart threadDelegate = new ThreadStart(Work.DoWork);
+        //Thread newThread = new Thread(threadDelegate);
+        //newThread.Start();
+
+        //// To start a thread using an instance method for the thread  
+        //// procedure, use the instance variable and method name when  
+        //// you create the ThreadStart delegate. Beginning in version 
+        //// 2.0 of the .NET Framework, the explicit delegate is not 
+        //// required. 
+        ////
+        //Work w = new Work();
+        //w.Data = 42;
+        //threadDelegate = new ThreadStart(w.DoMoreWork);
+        //newThread = new Thread(threadDelegate);
+        //newThread.Start();
+      
 
         protected override void ExecuteAsync()
 		{
@@ -203,6 +223,7 @@ namespace FtpActivities
                     {
                         if (this.IsActivityCanceled)
                         {
+                            sessiongen.CancelActivity();
                             //System.Windows.Forms.MessageBox.Show("Canceled");
                             return;
                         }
@@ -212,15 +233,54 @@ namespace FtpActivities
                             //System.Windows.Forms.MessageBox.Show("Enter4.1Execute");
                             if (sessiongen.RemoteDirectoryExists(rpath))
                             {
-                                //System.Windows.Forms.MessageBox.Show("Enter5Execute");
+                                ////System.Windows.Forms.MessageBox.Show("Enter5Execute");
+                                //sessiongen.DownloadMultiple(localpath, rpath);
+                                sessiongen.localPath = localpath;
+                                sessiongen.remotePath = rpath;
+                                sessiongen.mevent.Reset();
+                                Thread th = new Thread(new ThreadStart(sessiongen.DoDownloadMultiple));
+                                th.Start();
+                                
+                                bool blnNotReady = true; 
 
-                                sessiongen.DownloadMultiple(localpath, rpath);
+                                while (blnNotReady)
+                                {
+                                    if (this.IsActivityCanceled)
+                                    {
+                                        th.Abort();
+                                        sessiongen.CancelActivity();
+                                        //System.Windows.Forms.MessageBox.Show("Canceled");
+                                        return;
+                                    }
+                                    blnNotReady =  ! sessiongen.mevent.WaitOne(200);
+                                 }
+
                                 sessiongen.VerifyDownload(rpath, localpath, ref listFilesNotDown, ref listFilesDown);
                             }
                             if (sessiongen.RemoteFileExists(rpath))
                             {
                                 FtpFileClass ftpFile = sessiongen.GetFileAttributes(rpath);
-                                sessiongen.DownloadOne(rpath, localpath);
+                                //sessiongen.DownloadOne(rpath, localpath);
+                                sessiongen.localPath = localpath;
+                                sessiongen.remotePath = rpath;
+                                sessiongen.mevent.Reset();
+                                Thread th = new Thread(new ThreadStart(sessiongen.DoDownloadOne));
+                                th.Start();
+
+                                bool blnNotReady = true;
+
+                                while (blnNotReady)
+                                {
+                                    if (this.IsActivityCanceled)
+                                    {
+                                        th.Abort();
+                                        sessiongen.CancelActivity();
+                                        //System.Windows.Forms.MessageBox.Show("Canceled");
+                                        return;
+                                    }
+                                    blnNotReady = !sessiongen.mevent.WaitOne(200);
+                                }
+
                                 if (! File.Exists(localpath + @"\" + ftpFile.Name))
                                     listFilesNotDown.Add(ftpFile);
                                 else
@@ -232,14 +292,53 @@ namespace FtpActivities
                 else
                 {
                     if (sessiongen.RemoteDirectoryExists(remotepath))
-                    {   
-                        sessiongen.DownloadMultiple(localpath, remotepath);
+                    {
+                        //sessiongen.DownloadMultiple(localpath, remotepath);
+                        sessiongen.localPath = localpath;
+                        sessiongen.remotePath = remotepath;
+                        sessiongen.mevent.Reset();
+                        Thread th = new Thread(new ThreadStart(sessiongen.DoDownloadMultiple));
+                        th.Start();
+
+                        bool blnNotReady = true;
+
+                        while (blnNotReady)
+                        {
+                            if (this.IsActivityCanceled)
+                            {
+                                th.Abort();
+                                sessiongen.CancelActivity();
+                                //System.Windows.Forms.MessageBox.Show("Canceled");
+                                return;
+                            }
+                            blnNotReady = !sessiongen.mevent.WaitOne(200);
+                        }
                         sessiongen.VerifyDownload(remotepath, localpath, ref listFilesNotDown, ref listFilesDown);
                     }
                     if (sessiongen.RemoteFileExists(remotepath))
                     {
                         FtpFileClass ftpFile = sessiongen.GetFileAttributes(remotepath);
-                        sessiongen.DownloadOne(remotepath, localpath);
+                        //sessiongen.DownloadOne(remotepath, localpath);
+                        sessiongen.localPath = localpath;
+                        sessiongen.remotePath = remotepath;
+                        sessiongen.mevent.Reset();
+                        Thread th = new Thread(new ThreadStart(sessiongen.DoDownloadOne));
+                        th.Start();
+
+                        bool blnNotReady = true;
+
+                        while (blnNotReady)
+                        {
+                            if (this.IsActivityCanceled)
+                            {
+                                th.Abort();
+                                sessiongen.CancelActivity();
+                                //System.Windows.Forms.MessageBox.Show("Canceled");
+                                return;
+                            }
+                            blnNotReady = !sessiongen.mevent.WaitOne(200);
+                        }
+
                         if (!File.Exists(localpath + @"\" + ftpFile.Name))
                             listFilesNotDown.Add(ftpFile);
                         else

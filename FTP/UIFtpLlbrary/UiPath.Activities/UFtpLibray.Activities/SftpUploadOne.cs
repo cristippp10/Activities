@@ -103,6 +103,8 @@ namespace FtpActivities
         }
         //---
 
+        private FtpSessionGen sessiongen = null;
+
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
             metadata.AddArgument(new RuntimeArgument("FtpSession", typeof(FtpSessionGen), ArgumentDirection.In));
@@ -129,7 +131,7 @@ namespace FtpActivities
             try
             {
                 //Renci.SshNet.SftpClient sftpClient = null;
-                FtpSessionGen sessiongen = null;
+                
                 sessiongen = FtpSession.Get<FtpSessionGen>();
                 if (sessiongen == null)
                     if (SessionFromContainer != null)
@@ -148,7 +150,7 @@ namespace FtpActivities
                 string remotepath = RemotePath.Get<string>();
 
                 //string[] paths = null;
-                ArrayList listFilesNotUp= new ArrayList();
+                ArrayList listFilesNotUp = new ArrayList();
                 ArrayList listFilesUp = new ArrayList();
 
                 if (localpath.Contains("|"))
@@ -194,7 +196,28 @@ namespace FtpActivities
 
                         if (File.Exists(localpath) && !Directory.Exists(localpath))                            
                         {
-                            sessiongen.UploadOne(remotepath, localpath);
+                            //sessiongen.UploadOne(remotepath, localpath);
+
+                            sessiongen.localPath = localpath;
+                            sessiongen.remotePath = remotepath;
+                            sessiongen.mevent.Reset();
+                            Thread th = new Thread(new ThreadStart(sessiongen.DoUploadOne));
+                            th.Start();
+
+                            bool blnNotReady = true;
+
+                            while (blnNotReady)
+                            {
+                                if (this.IsActivityCanceled)
+                                {
+                                    th.Abort();
+                                    sessiongen.CancelActivity();
+                                    //System.Windows.Forms.MessageBox.Show("Canceled");
+                                    return;
+                                }
+                                blnNotReady = !sessiongen.mevent.WaitOne(200);
+                            }
+
                             string rpath = (remotepath == "") ? localpath.Substring(localpath.LastIndexOf(@"\") + 1) : remotepath + "/" + localpath.Substring(localpath.LastIndexOf(@"\") + 1);
                             if (sessiongen.RemoteFileExists(rpath))
                                 listFilesUp.Add(new FileInfo(localpath));
@@ -216,26 +239,26 @@ namespace FtpActivities
         protected override System.IAsyncResult BeginExecute(NativeActivityContext context, System.AsyncCallback callback, object state)
         {
             NativeActivityContext cx = context;
-
-            PropertyDescriptorCollection array = cx.DataContext.GetProperties(); //base.GetType().GetProperties();
+            SessionFromContainer = (FtpSessionGen)context.Properties.Find("ftpSession");
+            //PropertyDescriptorCollection array = cx.DataContext.GetProperties(); //base.GetType().GetProperties();
            
-            foreach (PropertyDescriptor propertyInfo in array)
-            {
-                if (propertyInfo.PropertyType != null && propertyInfo.PropertyType.FullName.Contains("FtpSessionGen"))//("SftpClient"))
-                {
-                    object obj = propertyInfo.GetValue(cx.DataContext);
-                    //SessionFromContainer = (FtpSessionGen)obj;
-                    FtpSessionGen sess = (FtpSessionGen)obj;
-                    if (sess != null)
-                        if (sess.IsConnected())
-                        {
-                            SessionFromContainer = (FtpSessionGen)obj;
-                            this.FtpSession.Set((FtpSessionGen)obj);
-                            break;
-                        }
-                    this.FtpSession.Set((FtpSessionGen)obj);
-                }
-            }
+            //foreach (PropertyDescriptor propertyInfo in array)
+            //{
+            //    if (propertyInfo.PropertyType != null && propertyInfo.PropertyType.FullName.Contains("FtpSessionGen"))//("SftpClient"))
+            //    {
+            //        object obj = propertyInfo.GetValue(cx.DataContext);
+            //        //SessionFromContainer = (FtpSessionGen)obj;
+            //        FtpSessionGen sess = (FtpSessionGen)obj;
+            //        if (sess != null)
+            //            if (sess.IsConnected())
+            //            {
+            //                SessionFromContainer = (FtpSessionGen)obj;
+            //                this.FtpSession.Set((FtpSessionGen)obj);
+            //                break;
+            //            }
+            //        this.FtpSession.Set((FtpSessionGen)obj);
+            //    }
+            //}
 
             return base.BeginExecute(context, callback, state);
         }

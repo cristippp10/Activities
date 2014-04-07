@@ -128,6 +128,8 @@ namespace FtpActivities
             set;
         }
 
+        private FtpSessionGen sessiongen = null;
+
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
             metadata.AddArgument(new RuntimeArgument("FtpSession", typeof(FtpSessionGen), ArgumentDirection.In));
@@ -154,8 +156,6 @@ namespace FtpActivities
         public SftpUploadMultiple()
         {
         }
-
-        FtpSessionGen sessiongen = null;
 
         protected override void ExecuteAsync()
         {
@@ -212,12 +212,51 @@ namespace FtpActivities
 
                             if (Directory.Exists(lpath))
                             {
-                                sessiongen.UploadMultiple(lpath, remotepath);
+                                //sessiongen.UploadMultiple(lpath, remotepath);
+                                sessiongen.localPath = lpath;
+                                sessiongen.remotePath = remotepath;
+                                sessiongen.mevent.Reset();
+                                Thread th = new Thread(new ThreadStart(sessiongen.DoUploadMultiple));
+                                th.Start();
+
+                                bool blnNotReady = true;
+
+                                while (blnNotReady)
+                                {
+                                    if (this.IsActivityCanceled)
+                                    {
+                                        th.Abort();
+                                        sessiongen.CancelActivity();
+                                        //System.Windows.Forms.MessageBox.Show("Canceled");
+                                        return;
+                                    }
+                                    blnNotReady = !sessiongen.mevent.WaitOne(200);
+                                }
+
                                 sessiongen.VerifyUpload(remotepath, lpath, ref listFilesNotUp, ref listFilesUp);
                             }
                             if (File.Exists(lpath) && !Directory.Exists(lpath))
                             {
-                                sessiongen.UploadOne(remotepath, lpath);
+                                //sessiongen.UploadOne(remotepath, lpath);
+                                sessiongen.localPath = lpath;
+                                sessiongen.remotePath = remotepath;
+                                sessiongen.mevent.Reset();
+                                Thread th = new Thread(new ThreadStart(sessiongen.DoUploadOne));
+                                th.Start();
+
+                                bool blnNotReady = true;
+
+                                while (blnNotReady)
+                                {
+                                    if (this.IsActivityCanceled)
+                                    {
+                                        th.Abort();
+                                        sessiongen.CancelActivity();
+                                        //System.Windows.Forms.MessageBox.Show("Canceled");
+                                        return;
+                                    }
+                                    blnNotReady = !sessiongen.mevent.WaitOne(200);
+                                }
                                 string rpath = (remotepath == "") ? lpath.Substring(lpath.LastIndexOf(@"\") + 1) : remotepath + "/" + lpath.Substring(lpath.LastIndexOf(@"\") + 1);
                                 if (sessiongen.RemoteFileExists(rpath))
                                     listFilesUp.Add(new FileInfo(lpath));
@@ -240,13 +279,51 @@ namespace FtpActivities
 
                         if (Directory.Exists(localpath))
                         {
-                            sessiongen.UploadMultiple(localpath, remotepath);
+                            //sessiongen.UploadMultiple(localpath, remotepath);
+                            sessiongen.localPath = localpath;
+                            sessiongen.remotePath = remotepath;
+                            sessiongen.mevent.Reset();
+                            Thread th = new Thread(new ThreadStart(sessiongen.DoUploadMultiple));
+                            th.Start();
+
+                            bool blnNotReady = true;
+
+                            while (blnNotReady)
+                            {
+                                if (this.IsActivityCanceled)
+                                {
+                                    th.Abort();
+                                    sessiongen.CancelActivity();
+                                    //System.Windows.Forms.MessageBox.Show("Canceled");
+                                    return;
+                                }
+                                blnNotReady = !sessiongen.mevent.WaitOne(200);
+                            }
                             sessiongen.VerifyUpload(remotepath, localpath, ref listFilesNotUp, ref listFilesUp);
                         }
 
                         if (File.Exists(localpath) && !Directory.Exists(localpath))                            
                         {
-                            sessiongen.UploadOne(remotepath, localpath);
+                            //sessiongen.UploadOne(remotepath, localpath);
+                            sessiongen.localPath = localpath;
+                            sessiongen.remotePath = remotepath;
+                            sessiongen.mevent.Reset();
+                            Thread th = new Thread(new ThreadStart(sessiongen.DoUploadOne));
+                            th.Start();
+
+                            bool blnNotReady = true;
+
+                            while (blnNotReady)
+                            {
+                                if (this.IsActivityCanceled)
+                                {
+                                    th.Abort();
+                                    sessiongen.CancelActivity();
+                                    //System.Windows.Forms.MessageBox.Show("Canceled");
+                                    return;
+                                }
+                                blnNotReady = !sessiongen.mevent.WaitOne(200);
+                            }
                             string rpath = (remotepath == "") ? localpath.Substring(localpath.LastIndexOf(@"\") + 1) : remotepath + "/" + localpath.Substring(localpath.LastIndexOf(@"\") + 1);
                             if (sessiongen.RemoteFileExists(rpath))
                                 listFilesUp.Add(new FileInfo(localpath));

@@ -61,7 +61,9 @@ namespace FtpActivities
 
         public ArrayList aKeyFiles = new ArrayList();
         public string SKeyFiles;
-        public PrivateKeyFile[] keyFiles; 
+        public PrivateKeyFile[] keyFiles;
+
+        public bool IsActivityCanceled = false;
 
         static void cl_ValidateCertificate(FtpClient control, FtpSslValidationEventArgs e)
         {
@@ -514,135 +516,190 @@ namespace FtpActivities
 
         public void DownloadOne(string remotepath, string localpath)
         {
-            if (FtpMode == 0)
+            try
             {
-                if (!sftpClient.IsConnected)
-                    sftpClient.Connect();
-                string namefile = remotepath.Substring(remotepath.LastIndexOf(@"/") + 1);
-                if (localpath.Length > 0)
-                    if (localpath[localpath.Length - 1] != '\\')
-                        localpath = localpath + @"\";
-                sftpClient.DownloadFile(remotepath, File.Create(localpath + namefile));
+                if (FtpMode == 0)
+                {
+                    if (!sftpClient.IsConnected)
+                        sftpClient.Connect();
+                    string namefile = remotepath.Substring(remotepath.LastIndexOf(@"/") + 1);
+                    if (localpath.Length > 0)
+                        if (localpath[localpath.Length - 1] != '\\')
+                            localpath = localpath + @"\";
+                    sftpClient.DownloadFile(remotepath, File.Create(localpath + namefile));
+                }
+                if (FtpMode == 1)
+                {
+                    if (!ftpClient.IsConnected)
+                        ftpClient.Connect();
+                    FtpClientFuncClass.DoDownloadOneFile(ftpClient, remotepath, localpath);
+                }
             }
-            if (FtpMode == 1)
+            catch (Exception ex)
             {
-                if (!ftpClient.IsConnected)
-                    ftpClient.Connect();
-                FtpClientFuncClass.DoDownloadOneFile(ftpClient, remotepath, localpath);
+                //System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-        
         }
 
         public void UploadOne(string remotepath, string localpath)
         {
-            string namefile = localpath.Substring(localpath.LastIndexOf(@"\") + 1);
-            string remotepathfile =  (remotepath == "" || remotepath == @"/" || remotepath == @"\") ? remotepath + namefile : remotepath + @"/" + namefile ;   
-            if (FtpMode == 0)
+            try
             {
-                if (!sftpClient.IsConnected)
-                    sftpClient.Connect();
-                
-                sftpClient.UploadFile(File.OpenRead(localpath), remotepathfile);
+                string namefile = localpath.Substring(localpath.LastIndexOf(@"\") + 1);
+                string remotepathfile = (remotepath == "" || remotepath == @"/" || remotepath == @"\") ? remotepath + namefile : remotepath + @"/" + namefile;
+                if (FtpMode == 0)
+                {
+                    if (!sftpClient.IsConnected)
+                        sftpClient.Connect();
+
+                    sftpClient.UploadFile(File.OpenRead(localpath), remotepathfile);
+                }
+                if (FtpMode == 1)
+                {
+                    if (!ftpClient.IsConnected)
+                        ftpClient.Connect();
+                    FtpClientFuncClass.DoUploadOneFile(ftpClient, remotepath, localpath);
+                }
             }
-            if (FtpMode == 1)
+            catch (Exception ex) 
             {
-                if (!ftpClient.IsConnected)
-                    ftpClient.Connect();
-                FtpClientFuncClass.DoUploadOneFile(ftpClient, remotepath, localpath);
+                //System.Windows.Forms.MessageBox.Show(ex.Message);
             }
-           
 
         }
+
+        public System.Threading.ManualResetEvent mevent = new ManualResetEvent(false);
+        public string localPath;
+        public string remotePath;
+
+        public void DoDownloadMultiple()
+        {
+            DownloadMultiple(localPath, remotePath);
+            mevent.Set();
+        }
+
+        public void DoDownloadOne()
+        {
+            DownloadOne(remotePath, localPath);
+            mevent.Set();
+        }
+
         public void DownloadMultiple(string localpath, string remotepath)
         {
-           if (localpath[localpath.Length - 1] != '\\')
-               localpath = localpath + @"\";
-
-            if (FtpMode == 0)
+            try
             {
+                if (localpath[localpath.Length - 1] != '\\')
+                    localpath = localpath + @"\";
 
-                if (!sftpClient.IsConnected)
-                    sftpClient.Connect();
-
-                string rootdirlocal = "";
-                if (remotepath.Length > 1)
+                if (FtpMode == 0)
                 {
-                    if (remotepath[remotepath.Length - 1] != '/')
+
+                    if (!sftpClient.IsConnected)
+                        sftpClient.Connect();
+
+                    string rootdirlocal = "";
+                    if (remotepath.Length > 1)
                     {
-                        rootdirlocal = remotepath.Substring(remotepath.LastIndexOf("/") + 1);
-                        //remotepath = remotepath + "/";
+                        if (remotepath[remotepath.Length - 1] != '/')
+                        {
+                            rootdirlocal = remotepath.Substring(remotepath.LastIndexOf("/") + 1);
+                            //remotepath = remotepath + "/";
+                        }
+                        else
+                        {
+                            rootdirlocal = remotepath.Substring(0, remotepath.Length - 1);
+                            rootdirlocal = rootdirlocal.Substring(rootdirlocal.LastIndexOf("/") + 1);
+                        }
                     }
-                    else
-                    {
-                        rootdirlocal = remotepath.Substring(0, remotepath.Length - 1);
-                        rootdirlocal = rootdirlocal.Substring(rootdirlocal.LastIndexOf("/") + 1);
-                    }
+
+                    localpath = localpath + rootdirlocal;
+
+                    Renci.SshNet.Tests.Classes.SftpClientTest sftpTest = new SftpClientTest();
+
+                    sftpTest.Sftp_Multiple_Async_Download_Files(sftpClient, localpath, remotepath, "*.*");
+
                 }
 
-                localpath = localpath + rootdirlocal;  
-               
-                Renci.SshNet.Tests.Classes.SftpClientTest sftpTest = new SftpClientTest();
-                sftpTest.Sftp_Multiple_Async_Download_Files(sftpClient, localpath, remotepath, "*.*");
-                
-            }
-
-            if (FtpMode == 1)
-            {
-                if (!ftpClient.IsConnected)
-                    ftpClient.Connect();
-
-                List<Thread> threads = new List<Thread>();
-                //System.Windows.Forms.MessageBox.Show("Enter6Execute");
-                FtpClientFunc.FtpClientFuncClass.Download(threads, ftpClient, remotepath, localpath, remotepath); //remotePath = "/"
-
-                while (threads.Count > 0)
+                if (FtpMode == 1)
                 {
-                    threads[0].Join();
+                    if (!ftpClient.IsConnected)
+                        ftpClient.Connect();
 
-                    lock (threads)
+                    List<Thread> threads = new List<Thread>();
+                    //System.Windows.Forms.MessageBox.Show("Enter6Execute");
+                    FtpClientFunc.FtpClientFuncClass.Download(threads, ftpClient, remotepath, localpath, remotepath); //remotePath = "/"
+
+                    while (threads.Count > 0)
                     {
-                        threads.RemoveAt(0);
+                        threads[0].Join();
+
+                        lock (threads)
+                        {
+                            threads.RemoveAt(0);
+                        }
                     }
                 }
             }
+            catch (Exception ex) 
+            {
+                //System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+        }
+
+        public void DoUploadMultiple()
+        {
+            UploadMultiple(localPath, remotePath);
+            mevent.Set();
+        }
+
+        public void DoUploadOne()
+        {
+            UploadOne(remotePath, localPath);
+            mevent.Set();
         }
 
         public void UploadMultiple(string localpath, string remotepath)
         {
-
-            string rootdirremote = "";
-            if (localpath.Length > 0)
+            try
             {
-                if (localpath[localpath.Length - 1] != '\\')
+                string rootdirremote = "";
+                if (localpath.Length > 0)
                 {
-                    rootdirremote = localpath.Substring(localpath.LastIndexOf(@"\") + 1);
-                    localpath = localpath + @"\";
+                    if (localpath[localpath.Length - 1] != '\\')
+                    {
+                        rootdirremote = localpath.Substring(localpath.LastIndexOf(@"\") + 1);
+                        localpath = localpath + @"\";
+                    }
+                    else
+                    {
+                        rootdirremote = localpath.Substring(0, localpath.Length - 1);
+                        rootdirremote = rootdirremote.Substring(rootdirremote.LastIndexOf(@"\") + 1);
+                    }
                 }
-                else
+
+                remotepath = (remotepath == "" || remotepath == "/" || remotepath == @"\") ? remotepath + rootdirremote : remotepath + "/" + rootdirremote;
+
+                if (FtpMode == 0)
                 {
-                    rootdirremote = localpath.Substring(0, localpath.Length - 1);
-                    rootdirremote = rootdirremote.Substring(rootdirremote.LastIndexOf(@"\") + 1);
+                    if (!sftpClient.IsConnected)
+                        sftpClient.Connect();
+
+                    Renci.SshNet.Tests.Classes.SftpClientTest sftpTest = new SftpClientTest();
+                    sftpTest.Sftp_BeginSynchronizeDirectories(sftpClient, localpath, remotepath, "*.*");
+                }
+
+                if (FtpMode == 1)
+                {
+                    if (!ftpClient.IsConnected)
+                        ftpClient.Connect();
+
+
+                    FtpClientFunc.FtpClientFuncClass.Upload(ftpClient, localpath, remotepath); //remotePath = "/"
                 }
             }
-
-            remotepath = (remotepath == "" || remotepath == "/" || remotepath == @"\") ? remotepath + rootdirremote : remotepath + "/" + rootdirremote;  
-                
-            if (FtpMode == 0)
+            catch (Exception ex) 
             {
-                if (!sftpClient.IsConnected)
-                    sftpClient.Connect();
-                
-                Renci.SshNet.Tests.Classes.SftpClientTest sftpTest = new SftpClientTest();
-                sftpTest.Sftp_BeginSynchronizeDirectories(sftpClient, localpath, remotepath, "*.*");
-            }
-
-            if (FtpMode == 1)
-            {
-                if (!ftpClient.IsConnected)
-                    ftpClient.Connect();
-
-
-                FtpClientFunc.FtpClientFuncClass.Upload(ftpClient, localpath, remotepath); //remotePath = "/"
+                //System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
        
@@ -885,6 +942,43 @@ namespace FtpActivities
             }
             return dataTable;
         }
+
+        public void CancelActivity()
+        {
+            this.IsActivityCanceled = true;
+
+            try
+            {
+                if (this.FtpMode == 0)
+                {
+                    
+                    lock (sftpClient)
+                    {
+                        //uint bs = sftpClient.BufferSize;
+                        //this.sftpClient.OperationTimeout = new TimeSpan(0, 0, 0);
+                        this.sftpClient.Disconnect();
+                    }
+                }
+
+                if (this.FtpMode == 1)
+                {
+
+                    lock (ftpClient)
+                    {
+                        //uint bs = sftpClient.BufferSize;
+                        //this.sftpClient.OperationTimeout = new TimeSpan(0, 0, 0);
+                        this.ftpClient.Disconnect();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            { 
+            }
+
+        }
+
+
 
 		~FtpSessionGen()
 		{

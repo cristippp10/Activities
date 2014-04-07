@@ -187,6 +187,8 @@ namespace FtpActivities
             set;
         }
 
+        private FtpSessionGen sessiongen = null;
+
 		protected override void CacheMetadata(NativeActivityMetadata metadata)
 		{
             metadata.AddArgument(new RuntimeArgument("FtpSession", typeof(FtpSessionGen), ArgumentDirection.In ));
@@ -216,7 +218,7 @@ namespace FtpActivities
 		{
 			try
             {
-                FtpSessionGen sessiongen = null;
+                
                 sessiongen = FtpSession.Get<FtpSessionGen>();
                 //SessionFromContainer
                 if (sessiongen == null)
@@ -276,7 +278,25 @@ namespace FtpActivities
                     if (sessiongen.RemoteFileExists(remotepath))
                     {
                         FtpFileClass ftpFile = sessiongen.GetFileAttributes(remotepath);
-                        sessiongen.DownloadOne(remotepath, localpath);
+                        //sessiongen.DownloadOne(remotepath, localpath);
+                        sessiongen.localPath = localpath;
+                        sessiongen.remotePath = remotepath;
+                        sessiongen.mevent.Reset();
+                        (new Thread(new ThreadStart(sessiongen.DoDownloadOne))).Start();
+
+                        bool blnNotReady = true;
+
+                        while (blnNotReady)
+                        {
+                            if (this.IsActivityCanceled)
+                            {
+                                sessiongen.CancelActivity();
+                                //System.Windows.Forms.MessageBox.Show("Canceled");
+                                return;
+                            }
+                            blnNotReady = !sessiongen.mevent.WaitOne(200);
+                        }
+                        
                         if (!File.Exists(localpath + @"\" + ftpFile.Name))
                             listFilesNotDown.Add(ftpFile);
                         else
@@ -311,26 +331,26 @@ namespace FtpActivities
         protected override System.IAsyncResult BeginExecute(NativeActivityContext context, System.AsyncCallback callback, object state)
         {
             NativeActivityContext cx = context;
+            SessionFromContainer = (FtpSessionGen)context.Properties.Find("ftpSession");
 
-
-            PropertyDescriptorCollection array = cx.DataContext.GetProperties(); //base.GetType().GetProperties();
-            //System.Reflection.PropertyInfo[] array = propDesCol; // properties;
-            foreach (PropertyDescriptor propertyInfo in array)
-            {
-               if (propertyInfo.PropertyType != null && propertyInfo.PropertyType.FullName.Contains("FtpSessionGen") )//("SftpClient"))
-                {   
-                    object obj = propertyInfo.GetValue(cx.DataContext);
+            //PropertyDescriptorCollection array = cx.DataContext.GetProperties(); //base.GetType().GetProperties();
+            ////System.Reflection.PropertyInfo[] array = propDesCol; // properties;
+            //foreach (PropertyDescriptor propertyInfo in array)
+            //{
+            //   if (propertyInfo.PropertyType != null && propertyInfo.PropertyType.FullName.Contains("FtpSessionGen") )//("SftpClient"))
+            //    {   
+            //        object obj = propertyInfo.GetValue(cx.DataContext);
                    
-                    FtpSessionGen sess = (FtpSessionGen)obj;
-                    if (sess != null)
-                        if (sess.IsConnected())
-                        {
-                            SessionFromContainer = (FtpSessionGen)obj;
-                            this.FtpSession.Set((FtpSessionGen)obj);
-                            break;
-                        }
-                }
-            }
+            //        FtpSessionGen sess = (FtpSessionGen)obj;
+            //        if (sess != null)
+            //            if (sess.IsConnected())
+            //            {
+            //                SessionFromContainer = (FtpSessionGen)obj;
+            //                this.FtpSession.Set((FtpSessionGen)obj);
+            //                break;
+            //            }
+            //    }
+            //}
             
 
             return base.BeginExecute(context, callback, state);
